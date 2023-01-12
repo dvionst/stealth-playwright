@@ -33,6 +33,13 @@ utils.stripProxyFromErrors = (handler = {}) => {
           throw err
         }
 
+        // CreepJS Defense Proxy Detection
+        try {
+          console.log("test cjs defense")
+          throw new Error();
+        } catch (e) {
+          err.stack = [...err.stack.split("\n").slice(0, 2), ...e.stack.split("\n").slice(2)].join("\n");
+        }
         // When something throws within one of our traps the Proxy will show up in error stacks
         // An earlier implementation of this code would simply strip lines with a blacklist,
         // but it makes sense to be more surgical here and only remove lines related to our Proxy.

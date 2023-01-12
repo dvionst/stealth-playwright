@@ -33,6 +33,7 @@ SCRIPTS: Dict[str, str] = {
     'utils': from_file('utils.js'),
     'webdriver': from_file('navigator.webdriver.js'),
     'webgl_vendor': from_file('webgl.vendor.js'),
+    'sourceurl': from_file('sourceurl.js'),
 }
 
 
@@ -72,6 +73,7 @@ class StealthConfig:
     navigator_vendor: bool = True
     outerdimensions: bool = True
     hairline: bool = True
+    sourceurl: bool = True
 
     # options
     vendor: str = 'Intel Inc.'
@@ -131,6 +133,8 @@ class StealthConfig:
             yield SCRIPTS['outerdimensions']
         if self.webgl_vendor:
             yield SCRIPTS['webgl_vendor']
+        if self.sourceurl:
+            yield SCRIPTS['sourceurl']
 
 
 def stealth_sync(page: SyncPage, config: StealthConfig = None):
